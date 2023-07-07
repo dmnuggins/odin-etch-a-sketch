@@ -1,4 +1,24 @@
 * {
     margin: 0;
     padding: 0;
+    /* border: 1px solid blue; */
+}
+
+.grid {
+    display: flex;
+}
+
+
+.row {
+    margin: 2px;
+    background: gold;
+    text-align: center;
+}
+
+.grid-item {
+    /* width: calc(100% / 16);
+    height: calc(100% / 16); */
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
 }
