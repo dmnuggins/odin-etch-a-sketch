@@ -10,7 +10,8 @@ function generateGrid(cols, rows) {
         column.className = 'col';
         for (var j = 0; j < rows; j++) {
             var row = document.createElement('div'); // generate row
-            row.className = 'row';
+            row.className = 'row cell';
+            row.id = String(i + 1) + '-' + String(j + 1); 
             // row.textContent = (i + 1) + '-' + (j + 1);
             column.appendChild(row);
         }
@@ -18,7 +19,24 @@ function generateGrid(cols, rows) {
     }
 }
 
-generateGrid(19,16);
+generateGrid(16,16);
+
+const gridItems = document.querySelectorAll('.cell');
+const hoverCounts = [];
+
+initGridListeners();
+function initGridListeners() {
+    gridItems.forEach((cell, index) => {
+
+        hoverCounts[index] = 0;
+        cell.addEventListener('mouseover', () => {
+            hoverCounts[index]++;
+            console.log(cell.id + ": " + hoverCounts[index]);
+            cell.classList.add('hover');
+        });
+    });
+}
+
 
 // Modal
 const modal = document.querySelector("#modal");
@@ -47,9 +65,14 @@ form.addEventListener('submit', (e) => {
     console.log(columns);
     console.log(rows);
 
+    removeGrid();
+
+    generateGrid(columns, rows);
+    initGridListeners();
+})
+
+function removeGrid() {
     while(gridContainer.firstChild) {
         gridContainer.removeChild(gridContainer.firstChild);
     }
-
-    generateGrid(columns, rows);
-})
+}

@@ -41,12 +41,16 @@ header {
     flex: 1;
 }
 
-.row {
+.cell {
     border: 1px solid black;
     width: 16px;
     height: 16px;
     background: #E4DCCF;
     text-align: center;
+}
+
+.cell.hover {
+    background-color: #002B5B;
 }
 
 .modal {
