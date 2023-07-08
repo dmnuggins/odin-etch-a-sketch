@@ -4,21 +4,86 @@
     /* border: 1px solid blue; */
 }
 
-.grid {
-    display: flex;
+/*
+Color Palettes
+#3C486B
+#F0F0F0
+#F9D949
+#F45050
+
+#F9F5EB
+#E4DCCF
+#EA5455
+#002B5B
+*/
+
+body {
+    background-color: #F9F5EB;
 }
 
-
-.row {
-    margin: 2px;
-    background: gold;
+header {
     text-align: center;
 }
 
-.grid-item {
-    /* width: calc(100% / 16);
-    height: calc(100% / 16); */
-    width: 10px;
-    height: 10px;
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
+    display: flex;
+    /* width: 1000px; */
+}
+
+.column {
+    flex: 1;
+}
+
+.row {
     border: 1px solid black;
+    width: 16px;
+    height: 16px;
+    background: #E4DCCF;
+    text-align: center;
+}
+
+.modal {
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    max-width: 24rem;
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 0 1em rgb(0 0 0 / .3);
+
+    /* Applies styling to all children of .modal */
+    & > * {
+        margin: 0 0 0.5rem 0;
+    }
+}
+
+.modal::backdrop {
+    background: rgb(0 0 0 / 0.4);
+}
+
+.button {
+    border: 1px solid black;
+    cursor: pointer;
+    background: #EA5455;
+    font-weight: 700;
+    padding: 10px 12px;
+    border-radius: 6px;
+}
+
+.button:hover {
+    scale: 110%;
+}
+
+form {
+    display: grid;
+    gap: 1em;
 }

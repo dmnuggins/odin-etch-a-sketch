@@ -13,7 +13,22 @@
     <header>
         <h1>Etch-a-Sketch</h1>
     </header>
-    <div class="grid"></div>
+    <div class="app">
+        <dialog class="modal" id="modal">
+            <h2>An interesting title</h2>
+            <button class="button close-button">close modal</button>
+            <form class="form" method="dialog">
+                <label>Columns <input type="text" id="colsInput"></label>
+                <label>Rows <input type="text" id="rowsInput"></label>
+                <button class="button" type="submit">Draw Grid</button>
+            </form>
+        </dialog>
+        <!-- <button class="button open-button">open modal</button> -->
+        <button class="button redraw-button">Redraw</button>
+        <div class="grid"></div>
+    </div>
+
+
     <footer></footer>
 </body>
 </html>
