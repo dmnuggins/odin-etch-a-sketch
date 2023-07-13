@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    /* border: 1px solid blue; */
+    border: 1px solid blue;
 }
 
 /*
@@ -11,14 +11,14 @@ Color Palettes
 #F9D949
 #F45050
 
-#F9F5EB
-#E4DCCF
-#EA5455
-#002B5B
+#F7F7F7
+#EEEEEE
+#393E46
+#929AAB
 */
 
 body {
-    background-color: #F9F5EB;
+    background-color: #F7F7F7;
 }
 
 header {
@@ -27,30 +27,29 @@ header {
 
 .app {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
 }
 
 .grid {
-    display: flex;
-    /* width: 1000px; */
+    display: grid;
+    width: 600px;
+    height: 600px;
 }
 
-.column {
-    flex: 1;
-}
+/* .col {
+    height: 200px;
+} */
 
 .cell {
     border: 1px solid black;
-    width: 16px;
-    height: 16px;
-    background: #E4DCCF;
-    text-align: center;
+    aspect-ratio: 1 / 1;
+    /* flex: 1; */
 }
 
 .cell.hover {
-    background-color: #002B5B;
+    background-color: #393E46;
 }
 
 .modal {
@@ -75,9 +74,10 @@ header {
 }
 
 .button {
+    color: #F7F7F7;
     border: 1px solid black;
     cursor: pointer;
-    background: #EA5455;
+    background: #393E46;
     font-weight: 700;
     padding: 10px 12px;
     border-radius: 6px;
@@ -85,6 +85,11 @@ header {
 
 .button:hover {
     scale: 110%;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
 }
 
 form {

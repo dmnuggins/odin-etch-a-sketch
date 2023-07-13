@@ -3,7 +3,8 @@ const gridContainer = document.querySelector('.grid');
 let gridItems;
 let hoverCounts = [];
 
-generateGrid(16,16);
+// generateGrid(16,16);
+generateGrid(16);
 
 
 function generateGrid(cols, rows) {
@@ -26,6 +27,26 @@ function generateGrid(cols, rows) {
 
 }
 
+function generateGrid(size) {
+    // Clear existin grid
+    gridContainer.innerHTML = '';
+
+    // Set grid dimensions
+    gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+    // Greate grid cells
+    for (let i = 0; i < size * size; i++) {
+        const cell = document.createElement('div');
+        cell.id = String(i + 1);
+        cell.classList.add('cell');
+        gridContainer.appendChild(cell);
+    }
+
+    getGridElements();
+    initGridListeners();
+}
+
 
 function initGridListeners() {
     gridItems.forEach((cell, index) => {
@@ -42,7 +63,7 @@ function initGridListeners() {
 
 function getGridElements() {
     gridItems = document.querySelectorAll('.cell');
-    console.log(gridItems);
+    // console.log(gridItems);
 }
 
 function resetHoverCounts() {
@@ -68,6 +89,18 @@ function resetEtchASketch() {
     initGridListeners();
 }
 
+// Slider input
+const slider = document.getElementById('slider');
+const columns = document.getElementById('col');
+const rows = document.getElementById('row');
+
+
+slider.addEventListener('input', () => {
+    const sliderValue = slider.value;
+    columns.textContent = sliderValue;
+    rows.textContent = sliderValue;
+})
+
 // Modal
 const modal = document.querySelector("#modal");
 const openModal = document.querySelector(".redraw-button");
@@ -81,10 +114,20 @@ closeModal.addEventListener("click", () => {
   modal.close();
 });
 
-// Get data from Modal
+// MODAL
 const form = document.querySelector('.form');
 const colsInput = document.getElementById('colsInput');
 const rowsInput = document.getElementById('rowsInput');
+
+colsInput.addEventListener('input', () => {
+    const numCols = parseInt(colsInput.value, 10);
+
+    if(isNaN(numCols) || numCols < 0 || numCols > 100) {
+        console.log("INVALID INPUT");
+    } else {
+        colsInput.value = numCols;
+    }
+})
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -93,8 +136,8 @@ form.addEventListener('submit', (e) => {
     const columns = parseInt(colsInput.value, 10);
 
     const rows = parseInt(rowsInput.value, 10);
-    console.log(columns);
-    console.log(rows);
+    // console.log(columns);
+    // console.log(rows);
 
     removeGrid();
 
@@ -104,9 +147,9 @@ form.addEventListener('submit', (e) => {
 })
 
 const clearButton = document.querySelector('.clear-board-button')
-console.log(clearButton);
+// console.log(clearButton);
 clearButton.addEventListener('click', () => {
-    console.log(gridItems);
+    // console.log(gridItems);
     gridItems.forEach(cell => {
         cell.classList.remove('hover');
     });
