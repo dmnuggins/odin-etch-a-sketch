@@ -6,27 +6,6 @@ let hoverCounts = [];
 // generateGrid(16,16);
 generateGrid(16);
 
-
-function generateGrid(cols, rows) {
-
-    for (var i = 0; i < cols; i++) {
-        var column = document.createElement('div'); // generate column
-        column.className = 'col';
-        for (var j = 0; j < rows; j++) {
-            var row = document.createElement('div'); // generate row
-            row.className = 'row cell';
-            row.id = String(i + 1) + '-' + String(j + 1);
-            // row.textContent = (i + 1) + '-' + (j + 1);
-            column.appendChild(row);
-        }
-        gridContainer.appendChild(column);
-    }
-
-    getGridElements();
-    initGridListeners();
-
-}
-
 function generateGrid(size) {
     // Clear existin grid
     gridContainer.innerHTML = '';
@@ -93,6 +72,7 @@ function resetEtchASketch() {
 const slider = document.getElementById('slider');
 const columns = document.getElementById('col');
 const rows = document.getElementById('row');
+const redrawButton = document.querySelector(".redraw-button");
 
 
 slider.addEventListener('input', () => {
@@ -101,50 +81,9 @@ slider.addEventListener('input', () => {
     rows.textContent = sliderValue;
 })
 
-// Modal
-const modal = document.querySelector("#modal");
-const openModal = document.querySelector(".redraw-button");
-const closeModal = document.querySelector(".close-button");
-
-openModal.addEventListener("click", () => {
-  modal.showModal();
-});
-
-closeModal.addEventListener("click", () => {
-  modal.close();
-});
-
-// MODAL
-const form = document.querySelector('.form');
-const colsInput = document.getElementById('colsInput');
-const rowsInput = document.getElementById('rowsInput');
-
-colsInput.addEventListener('input', () => {
-    const numCols = parseInt(colsInput.value, 10);
-
-    if(isNaN(numCols) || numCols < 0 || numCols > 100) {
-        console.log("INVALID INPUT");
-    } else {
-        colsInput.value = numCols;
-    }
-})
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    // need to limit the num of grids to 100 or less
-    const columns = parseInt(colsInput.value, 10);
-
-    const rows = parseInt(rowsInput.value, 10);
-    // console.log(columns);
-    // console.log(rows);
-
-    removeGrid();
-
-    generateGrid(columns, rows);
-    resetEtchASketch();
-    modal.close();
-})
+redrawButton.addEventListener("click", () => {
+    generateGrid(slider.value);
+  });
 
 const clearButton = document.querySelector('.clear-board-button')
 // console.log(clearButton);
