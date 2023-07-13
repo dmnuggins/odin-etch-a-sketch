@@ -2,8 +2,12 @@
 const gridContainer = document.querySelector('.grid');
 let gridItems;
 let hoverCounts = [];
-let rainbowOn = false;
-let pencilOn = false;
+let rainbowMode = false;
+let pencilMode = false;
+let eraserMode = false;
+
+// flag will trigger when color is added to cell
+let colored = false;
 
 
 // generateGrid(16,16);
@@ -37,13 +41,17 @@ function initGridListeners() {
         cell.addEventListener('mouseover', () => {
             hoverCounts[index] += 1;
             // console.log(cell.id + ": " + hoverCounts[index]);
-            if(rainbowOn) {
+            if(rainbowMode) {
                 cell.style.backgroundColor = getRandomColor();
             }
-            else if(pencilOn) {
+            else if(pencilMode) {
                 const hoverVal = hoverCounts[cell.id - 1];
                 const opacityVal = Math.min(hoverVal * 0.3, 1);
                 cell.style.backgroundColor =  `rgb(57, 62, 70, ${opacityVal})`;
+            }
+            else if(eraserMode) {
+                cell.style.backgroundColor = "#F7F7F7";
+                hoverCounts[cell.id - 1] = 0;
             } else {
                 cell.style.backgroundColor = 'rgb(57, 62, 70)';
             }
@@ -82,6 +90,8 @@ function getRandomColor() {
     return `rgb(${red}, ${green}, ${blue})`;
 }
 
+
+
 // INPUTS
 const slider = document.getElementById('slider');
 const columns = document.getElementById('col');
@@ -111,12 +121,21 @@ clearButton.addEventListener('click', () => {
 const rainbowButton = document.querySelector('.rgbiv-button');
 
 rainbowButton.addEventListener('click', () => {
-    rainbowOn = !rainbowOn;
-    pencilOn = false;
+    rainbowMode = true;
+    pencilMode = false;
+    eraserMode = false;
 })
 
 const pencilButton = document.querySelector('.pencil-button');
 pencilButton.addEventListener('click', () => {
-    pencilOn = !pencilOn;
-    rainbowOn = false;
+    pencilMode = true;
+    rainbowMode = false;
+    eraserMode = false;
+})
+
+const eraserButton = document.querySelector('.eraser-button');
+eraserButton.addEventListener('click', () => {
+    eraserMode = true;
+    rainbowMode = false;
+    pencilMode = false;
 })
