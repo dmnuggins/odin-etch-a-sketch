@@ -11,7 +11,7 @@ function generateGrid(cols, rows) {
         for (var j = 0; j < rows; j++) {
             var row = document.createElement('div'); // generate row
             row.className = 'row cell';
-            row.id = String(i + 1) + '-' + String(j + 1); 
+            row.id = String(i + 1) + '-' + String(j + 1);
             // row.textContent = (i + 1) + '-' + (j + 1);
             column.appendChild(row);
         }
@@ -21,8 +21,8 @@ function generateGrid(cols, rows) {
 
 generateGrid(16,16);
 
-const gridItems = document.querySelectorAll('.cell');
-const hoverCounts = [];
+let gridItems = document.querySelectorAll('.cell');
+let hoverCounts = [];
 
 initGridListeners();
 function initGridListeners() {
@@ -37,6 +37,20 @@ function initGridListeners() {
     });
 }
 
+function getGridElements() {
+    gridItems = document.querySelectorAll('.cell');
+}
+
+function resetHoverCounts() {
+    hoverCounts = [];
+}
+
+//  bundles steps to reset functionality of etch-a-sketch
+function resetEtchASketch() {
+    resetHoverCounts();
+    getGridElements();
+    initGridListeners();
+}
 
 // Modal
 const modal = document.querySelector("#modal");
@@ -59,6 +73,7 @@ const rowsInput = document.getElementById('rowsInput');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    // need to limit the num of grids to 100 or less
     const columns = parseInt(colsInput.value, 10);
 
     const rows = parseInt(rowsInput.value, 10);
@@ -68,7 +83,8 @@ form.addEventListener('submit', (e) => {
     removeGrid();
 
     generateGrid(columns, rows);
-    initGridListeners();
+    resetEtchASketch();
+    modal.close();
 })
 
 function removeGrid() {
