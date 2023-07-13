@@ -3,6 +3,7 @@ const gridContainer = document.querySelector('.grid');
 let gridItems;
 let hoverCounts = [];
 let rainbowOn = false;
+let pencilOn = false;
 
 
 // generateGrid(16,16);
@@ -34,13 +35,17 @@ function initGridListeners() {
 
         hoverCounts[index] = 0;
         cell.addEventListener('mouseover', () => {
-            hoverCounts[index]++;
+            hoverCounts[index] += 1;
             // console.log(cell.id + ": " + hoverCounts[index]);
-            // cell.classList.add('hover');
             if(rainbowOn) {
                 cell.style.backgroundColor = getRandomColor();
+            }
+            else if(pencilOn) {
+                const hoverVal = hoverCounts[cell.id - 1];
+                const opacityVal = Math.min(hoverVal * 0.3, 1);
+                cell.style.backgroundColor =  `rgb(57, 62, 70, ${opacityVal})`;
             } else {
-                cell.style.backgroundColor = '#393E46';
+                cell.style.backgroundColor = 'rgb(57, 62, 70)';
             }
         });
     });
@@ -62,11 +67,6 @@ function removeGrid() {
     }
 }
 
-function clearGrid() {
-    gridItems.forEach(cell => {
-        cell.style.color = "#E4DCCF";
-    });
-}
 
 //  bundles steps to reset functionality of etch-a-sketch
 function resetEtchASketch() {
@@ -104,7 +104,7 @@ const clearButton = document.querySelector('.clear-board-button');
 clearButton.addEventListener('click', () => {
     // console.log(gridItems);
     gridItems.forEach(cell => {
-        cell.classList.remove('hover');
+        cell.style.backgroundColor = "#F7F7F7";
     });
 })
 
@@ -112,4 +112,11 @@ const rainbowButton = document.querySelector('.rgbiv-button');
 
 rainbowButton.addEventListener('click', () => {
     rainbowOn = !rainbowOn;
+    pencilOn = false;
+})
+
+const pencilButton = document.querySelector('.pencil-button');
+pencilButton.addEventListener('click', () => {
+    pencilOn = !pencilOn;
+    rainbowOn = false;
 })
