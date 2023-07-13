@@ -1,9 +1,12 @@
-console.log("Etch-a-Sketch");
-
+// Initialization
 const gridContainer = document.querySelector('.grid');
+let gridItems;
+let hoverCounts = [];
+
+generateGrid(16,16);
+
 
 function generateGrid(cols, rows) {
-
 
     for (var i = 0; i < cols; i++) {
         var column = document.createElement('div'); // generate column
@@ -17,32 +20,45 @@ function generateGrid(cols, rows) {
         }
         gridContainer.appendChild(column);
     }
+
+    getGridElements();
+    initGridListeners();
+
 }
 
-generateGrid(16,16);
 
-let gridItems = document.querySelectorAll('.cell');
-let hoverCounts = [];
-
-initGridListeners();
 function initGridListeners() {
     gridItems.forEach((cell, index) => {
 
         hoverCounts[index] = 0;
         cell.addEventListener('mouseover', () => {
             hoverCounts[index]++;
-            console.log(cell.id + ": " + hoverCounts[index]);
+            // console.log(cell.id + ": " + hoverCounts[index]);
             cell.classList.add('hover');
         });
     });
 }
 
+
 function getGridElements() {
     gridItems = document.querySelectorAll('.cell');
+    console.log(gridItems);
 }
 
 function resetHoverCounts() {
     hoverCounts = [];
+}
+
+function removeGrid() {
+    while(gridContainer.firstChild) {
+        gridContainer.removeChild(gridContainer.firstChild);
+    }
+}
+
+function clearGrid() {
+    gridItems.forEach(cell => {
+        cell.style.color = "#E4DCCF";
+    });
 }
 
 //  bundles steps to reset functionality of etch-a-sketch
@@ -87,8 +103,12 @@ form.addEventListener('submit', (e) => {
     modal.close();
 })
 
-function removeGrid() {
-    while(gridContainer.firstChild) {
-        gridContainer.removeChild(gridContainer.firstChild);
-    }
-}
+const clearButton = document.querySelector('.clear-board-button')
+console.log(clearButton);
+clearButton.addEventListener('click', () => {
+    console.log(gridItems);
+    gridItems.forEach(cell => {
+        cell.classList.remove('hover');
+    });
+})
+
