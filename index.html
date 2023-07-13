@@ -20,23 +20,16 @@
       <!-- <button class="button open-button">open modal</button> -->
       <div class="input-container">
         <button class="button redraw-button">Redraw</button>
-        <button class="button clear-board-button">Clear</button>
+
         <input type="range" id="slider" min="0" max="100" step="1" value="64" />
         <div class="label-container">
           <span id="col">64</span> by <span id="row">64</span>
         </div>
+        <button class="button clear-board-button">Clear</button>
+        <button class="button rgbiv-button">Rainbow</button>
       </div>
       <div class="grid"></div>
     </div>
-    <dialog class="modal" id="modal">
-      <h2>An interesting title</h2>
-      <button class="button close-button">close modal</button>
-      <form class="form" method="dialog">
-        <label>Number of columns<input type="text" id="colsInput" /></label>
-        <label>Number of rows<input type="text" id="rowsInput" /></label>
-        <button class="button" type="submit">Draw Grid</button>
-      </form>
-    </dialog>
     <footer></footer>
   </body>
 </html>

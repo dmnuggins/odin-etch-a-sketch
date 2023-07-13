@@ -48,9 +48,9 @@ header {
     /* flex: 1; */
 }
 
-.cell.hover {
+/* .cell.hover {
     background-color: #393E46;
-}
+} */
 
 .modal {
     position: fixed;

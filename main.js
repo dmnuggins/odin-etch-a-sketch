@@ -2,6 +2,8 @@
 const gridContainer = document.querySelector('.grid');
 let gridItems;
 let hoverCounts = [];
+let rainbowOn = false;
+
 
 // generateGrid(16,16);
 generateGrid(16);
@@ -34,7 +36,12 @@ function initGridListeners() {
         cell.addEventListener('mouseover', () => {
             hoverCounts[index]++;
             // console.log(cell.id + ": " + hoverCounts[index]);
-            cell.classList.add('hover');
+            // cell.classList.add('hover');
+            if(rainbowOn) {
+                cell.style.backgroundColor = getRandomColor();
+            } else {
+                cell.style.backgroundColor = '#393E46';
+            }
         });
     });
 }
@@ -68,7 +75,14 @@ function resetEtchASketch() {
     initGridListeners();
 }
 
-// Slider input
+function getRandomColor() {
+    const red = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
+    return `rgb(${red}, ${green}, ${blue})`;
+}
+
+// INPUTS
 const slider = document.getElementById('slider');
 const columns = document.getElementById('col');
 const rows = document.getElementById('row');
@@ -85,7 +99,7 @@ redrawButton.addEventListener("click", () => {
     generateGrid(slider.value);
   });
 
-const clearButton = document.querySelector('.clear-board-button')
+const clearButton = document.querySelector('.clear-board-button');
 // console.log(clearButton);
 clearButton.addEventListener('click', () => {
     // console.log(gridItems);
@@ -94,3 +108,8 @@ clearButton.addEventListener('click', () => {
     });
 })
 
+const rainbowButton = document.querySelector('.rgbiv-button');
+
+rainbowButton.addEventListener('click', () => {
+    rainbowOn = !rainbowOn;
+})
