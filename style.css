@@ -1,16 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Roboto&display=swap');
+
 * {
     margin: 0;
     padding: 0;
-    border: 1px solid blue;
 }
 
 /*
 Color Palettes
-#3C486B
-#F0F0F0
-#F9D949
-#F45050
-
 #F7F7F7
 #EEEEEE
 #393E46
@@ -23,6 +19,10 @@ body {
 
 header {
     text-align: center;
+    padding: 50px;
+    font-family: 'Lilita One', cursive;
+    font-size: 2rem;
+    color: #393E46;
 }
 
 .app {
@@ -30,47 +30,23 @@ header {
     justify-content: center;
     align-items: center;
     gap: 2rem;
+    font-family: 'Roboto', sans-serif;
 }
 
 .grid {
     display: grid;
     width: 600px;
     height: 600px;
+    box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
 }
-
-/* .col {
-    height: 200px;
-} */
 
 .cell {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     aspect-ratio: 1 / 1;
-    /* flex: 1; */
 }
 
-/* .cell.hover {
-    background-color: #393E46;
-} */
-
-.modal {
-    position: fixed;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 1rem;
-    max-width: 24rem;
-    border: 0;
-    border-radius: 12px;
-    box-shadow: 0 0 1em rgb(0 0 0 / .3);
-
-    /* Applies styling to all children of .modal */
-    & > * {
-        margin: 0 0 0.5rem 0;
-    }
-}
-
-.modal::backdrop {
-    background: rgb(0 0 0 / 0.4);
+input[type=range]::-webkit-slider-runnable-track {
+    cursor: pointer;
 }
 
 .button {
@@ -81,15 +57,24 @@ header {
     font-weight: 700;
     padding: 10px 12px;
     border-radius: 6px;
+    transition: all .1s ease-in-out;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
 }
 
 .button:hover {
-    scale: 110%;
+    transform: scale(1.1);
 }
 
-.input-container {
+.grid-size-container {
+    text-align: center;
+    margin: 10px 0px;
+}
+
+.draw-options-container {
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
 form {

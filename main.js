@@ -1,10 +1,11 @@
 // Initialization
 const gridContainer = document.querySelector('.grid');
 let gridItems;
-let hoverCounts = [];
+let opacityLevels = [];
 let rainbowMode = false;
 let pencilMode = false;
 let eraserMode = false;
+let penMode = true;
 
 // flag will trigger when color is added to cell
 let colored = false;
@@ -37,21 +38,21 @@ function generateGrid(size) {
 function initGridListeners() {
     gridItems.forEach((cell, index) => {
 
-        hoverCounts[index] = 0;
+        opacityLevels[index] = 0;
         cell.addEventListener('mouseover', () => {
-            hoverCounts[index] += 1;
-            // console.log(cell.id + ": " + hoverCounts[index]);
+            opacityLevels[index] += 1;
+            // console.log(cell.id + ": " + opacityLevels[index]);
             if(rainbowMode) {
                 cell.style.backgroundColor = getRandomColor();
             }
             else if(pencilMode) {
-                const hoverVal = hoverCounts[cell.id - 1];
+                const hoverVal = opacityLevels[cell.id - 1];
                 const opacityVal = Math.min(hoverVal * 0.3, 1);
                 cell.style.backgroundColor =  `rgb(57, 62, 70, ${opacityVal})`;
             }
             else if(eraserMode) {
                 cell.style.backgroundColor = "#F7F7F7";
-                hoverCounts[cell.id - 1] = 0;
+                opacityLevels[cell.id - 1] = 0;
             } else {
                 cell.style.backgroundColor = 'rgb(57, 62, 70)';
             }
@@ -65,8 +66,8 @@ function getGridElements() {
     // console.log(gridItems);
 }
 
-function resetHoverCounts() {
-    hoverCounts = [];
+function resetOpacityLevels() {
+    opacityLevels = [];
 }
 
 function removeGrid() {
@@ -78,7 +79,7 @@ function removeGrid() {
 
 //  bundles steps to reset functionality of etch-a-sketch
 function resetEtchASketch() {
-    resetHoverCounts();
+    resetOpacityLevels();
     getGridElements();
     initGridListeners();
 }
@@ -96,7 +97,12 @@ function getRandomColor() {
 const slider = document.getElementById('slider');
 const columns = document.getElementById('col');
 const rows = document.getElementById('row');
+const clearButton = document.querySelector('.clear-board-button');
 const redrawButton = document.querySelector(".redraw-button");
+const rainbowButton = document.querySelector('.rgbiv-button');
+const pencilButton = document.querySelector('.pencil-button');
+const penButton = document.querySelector('.pen-button')
+const eraserButton = document.querySelector('.eraser-button');
 
 
 slider.addEventListener('input', () => {
@@ -109,7 +115,6 @@ redrawButton.addEventListener("click", () => {
     generateGrid(slider.value);
   });
 
-const clearButton = document.querySelector('.clear-board-button');
 // console.log(clearButton);
 clearButton.addEventListener('click', () => {
     // console.log(gridItems);
@@ -118,24 +123,30 @@ clearButton.addEventListener('click', () => {
     });
 })
 
-const rainbowButton = document.querySelector('.rgbiv-button');
-
 rainbowButton.addEventListener('click', () => {
     rainbowMode = true;
     pencilMode = false;
     eraserMode = false;
+    penMode = false;
 })
 
-const pencilButton = document.querySelector('.pencil-button');
 pencilButton.addEventListener('click', () => {
     pencilMode = true;
     rainbowMode = false;
     eraserMode = false;
+    penMode = false;
 })
 
-const eraserButton = document.querySelector('.eraser-button');
+penButton.addEventListener('click', () => {
+    penMode = true;
+    pencilMode = false;
+    rainbowMode = false;
+    eraserMode = false;
+})
+
 eraserButton.addEventListener('click', () => {
     eraserMode = true;
     rainbowMode = false;
     pencilMode = false;
+    penMode = false;
 })
