@@ -1,5 +1,5 @@
 # Etch-a-Sketch
-A simple sketch app with a few style options. Grid is resizeable. Pretty solid feature if I say so myself! 
+A simple sketch app with a few style options. Grid density is adjustable. Pretty solid feature if I say so myself! 
 
 Doodle here: https://dmnuggins.github.io/odin-etch-a-sketch/
 
